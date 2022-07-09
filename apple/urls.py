@@ -24,10 +24,12 @@ urlpatterns = [
     path('backend/', admin.site.urls),
     
     path('', views.home, name = 'home'),
-    path('about', views.about, name = 'about'),
+    path('about', views.about, name = 'about'),    
     
-    path('mac/<slug:slug>/', views.viewMac, name = 'viewMac'),
+    path('mac/air/', views.viewAllMacs, kwargs = { 'type': 'air' }, name = 'viewAllMacAir'),
+    path('mac/pro/', views.viewAllMacs, kwargs = { 'type': 'pro' }, name = 'viewAllMacPro'),
     path('mac', views.viewAllMacs, name = 'viewAllMacs'),
+    path('mac/<slug:slug>/', views.viewMac, name = 'viewMac'),    
 
     path('iphone/<slug:slug>/', views.viewiPhone, name = 'viewiPhone'),
     path('iphone', views.viewAlliPhones, name = 'viewAlliPhones'),

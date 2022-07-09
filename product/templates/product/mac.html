@@ -4,7 +4,38 @@
 
 {% block content %}
 {% load static %}
-    <h1 class="my-3">All Macs</h1>
+    
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="my-3">All Macs</h1>
+
+        {% url 'viewAllMacs' as mac_url %}
+        {% url 'viewAllMacAir' as air_url %}
+        {% url 'viewAllMacPro' as pro_url %}
+        
+        <div>
+            Filter By :
+
+            {% if request.get_full_path != mac_url %}
+                <a href="{% url 'viewAllMacs' %}">All</a>
+                &middot;
+            {% endif %}
+            
+            {% if request.get_full_path == air_url %}
+                Air
+            {% else %}
+                <a href="{% url 'viewAllMacAir' %}">Air</a>
+            {% endif %}
+            
+            &middot;
+
+            {% if request.get_full_path == pro_url %}
+                Pro
+            {% else %}
+                <a href="{% url 'viewAllMacPro' %}">Pro</a>
+            {% endif %}
+            
+        </div>
+    </div>
 
     {% include "product/article-title.html" %}
 
@@ -46,7 +77,7 @@
                     <td>                        
                         <a href="{% url 'viewMac' slug=product.slug %}">
                             {{ product.title | upper }}
-                        </a>    
+                        </a>
                     </td>
                     <td class="text-center">{{ product.price_locale }}</td>            
                 </tr>

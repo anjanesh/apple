@@ -30,10 +30,11 @@
     {% for product in page_obj %}
         {# Each "product" is a Product model object. #}
         <li>
-        <a href="{% url 'viewMac' slug=product.slug %}">
-            {{ product.title | upper }}
-        </a>
-        - Starting at {{ product.price_locale }}
+            {{ product.year }}
+            <a href="{% url 'viewMac' slug=product.slug %}">
+                {{ product.title | upper }}
+            </a>
+            - Starting at {{ product.price_locale }}
         </li>
         
     {% endfor %}    

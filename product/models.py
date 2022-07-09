@@ -79,6 +79,7 @@ class Item(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     reseller = models.ForeignKey(Reseller, on_delete=models.CASCADE)        
     price = models.PositiveIntegerField(default=0)
+    offers = models.TextField(null=True, blank=True)
     url = models.URLField(max_length=500, blank=True)
     last_updated = models.DateTimeField()
     active = models.BooleanField(default=True)

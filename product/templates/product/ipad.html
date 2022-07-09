@@ -4,39 +4,54 @@
 
 {% block content %}
 {% load static %}
-    <h1>All iPads</h1>
+    <h1 class="my-3">All iPads</h1>
 
     {% include "product/article-title.html" %}
 
-    <div class="pagination">
+    <div class="pagination mb-3">
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ page_obj.previous_page_number }}">previous</a>
             {% endif %}
     
+            {% if page_obj.has_previous or page_obj.has_next %}    
             <span class="current">
                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
             </span>
+            {% endif %}
     
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}">next</a>
                 <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
-    </div>
-    
-    <ul>
-    {% for product in page_obj %}
-        {# Each "product" is a Product model object. #}
-        <li>
-        <a href="{% url 'viewiPad' slug=product.slug %}">
-            {{ product.title }}
-        </a>
-        - Starting at {{ product.price_locale }}
-        </li>
-        
-    {% endfor %}    
-    </ul>
+    </div>    
+
+    <table class="table table-light table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col" class="text-center">Year</th>
+            <th scope="col">Product</th>
+            <th scope="col" class="text-center">Starting Price</th>            
+          </tr>
+        </thead>
+        <tbody>
+            {% for product in page_obj %}
+            {# Each "product" is a Product model object. #}
+                <tr>
+                    <th scope="row" class="text-center">{{ forloop.counter }}</th>
+                    <td class="text-center">{{ product.year }}</td>
+                    <td>                        
+                        <a href="{% url 'viewiPad' slug=product.slug %}">
+                            {{ product.title | upper }}
+                        </a>    
+                    </td>
+                    <td class="text-center">{{ product.price_locale }}</td>            
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     
 {% endblock %}

@@ -26,7 +26,7 @@ def viewMac(request, slug):
 
 def viewAllMacs(request):    
     products, article, paginator, page_number, page_obj = viewAllProducts(request, 'mac')
-    return render(request, 'product/mac.html', { 'page_obj': page_obj })
+    return render(request, 'product/mac.html', { 'page_obj': page_obj, 'article': article })
 
 def viewiPhone(request, slug):
     product, items = viewProduct(slug)
@@ -67,9 +67,9 @@ def viewAllProducts(request, typeOfProduct):
 
     if typeOfProduct == 'mac':
         query = Q(type='MBP') | Q(type='MBA') | Q(type='iMAC') | Q(type='iMACPRO') | Q(type='MINI') | Q(type='MACPRO')
-        query = Q(type__in=['MBA', 'MBP', 'iMAC', 'iMACPRO', 'MINI', 'MACPRO']) # Either one works
-        
+        query = Q(type__in=['MBA', 'MBP', 'iMAC', 'iMACPRO', 'MINI', 'MACPRO']) # Either one works        
         article_query = Q(product__in=['MBA', 'MBP', 'iMAC', 'iMACPRO', 'MINI', 'MACPRO'])
+
     elif typeOfProduct == 'iphone':
         query = Q(type__in=['iPHONE'])
         article_query = Q(product__in=['iPHONE'])
@@ -82,7 +82,7 @@ def viewAllProducts(request, typeOfProduct):
         query = Q(type__in=['WATCH'])
         article_query = Q(product__in=['WATCH'])
 
-    products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price')).order_by('-created')
+    products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price')).order_by('-year')
     
     # article = Article.objects.all().filter(article_query).order_by('pub_date')[0]
     try:

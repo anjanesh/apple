@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Apple Resellers in India{% endblock %}
+
+{% block content %}
+{% load static %}
+    <h1 class="display-1 pb-3"><u>Service Centers</u></h1>
+
+    <style type="text/css">
+    .card-img-top {
+        width: 100%;
+        height: 10vw;
+        object-fit: cover;
+    }        
+    </style>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for reseller in resellers %}
+    <div class="col">
+        <div class="card">          
+          <img src="{{ reseller.logo.url }}" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">{{ reseller.name }}</h5>
+            <p class="card-text">
+                <a href="mailto:{{ reseller.email }}">{{ reseller.email }}</a><br/>
+                <a href="tel:{{ reseller.phone }}">{{ reseller.phone }}</a><br/>
+                <a href="{{ reseller.url }}" target="_blank">{{ reseller.url }}</a><br/>
+                {% comment %}
+                <a href="{% url 'viewReseller' slug=reseller.slug %}">
+                    {{ reseller.name }}
+                </a>
+                {% endcomment %}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}    
+    </div>
+    
+{% endblock %}

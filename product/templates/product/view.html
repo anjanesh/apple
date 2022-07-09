@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ product.title }} {% endblock %}
+
+{% block content %}
+
+    {{ error }}
+    
+    <h1>{{ product.title }}</h1>
+
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-md-6">
+                <div class="p-3 border bg-light text-center">
+                    <img src="{{ product.image.url }}" style="max-width:100%" />
+                </div>
+                <div class="p-3 mt-2 border bg-light">
+                    {{ product.description }}
+                </div>
+            </div>
+            <div class="col-md-6 d-sm-none">
+                <div class="p-3 border bg-light">
+                    {% for item in items %}
+                    <div>                        
+                        <div class="d-flex justify-content-between">
+                            <div>{{ item.reseller.name }}</div>
+                            <div>{{ item.price_locale }}</div>
+                        </div>                            
+                        <a href="tel:{{ item.reseller.phone }}">{{ item.reseller.phone }}</a>
+                        <hr class="my-4" />
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6 d-none d-sm-block">
+                <div class="p-3 border bg-light" style="overflow-x: scroll;">
+                    <table class="table">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Reseller</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col" class="text-center">Buy Online</th>
+                        </tr>
+                        {% for item in items %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ item.reseller.name }}</td>
+                            <td data-price="{{ item.price }}">{{ item.price_locale }}</td>
+                            <td><a href="tel:{{ item.reseller.phone }}">{{ item.reseller.phone }}</a></td>
+                            <td class="text-center">
+                                {% if item.url %}
+                                <a href="{{ item.url }}" target="_blank">Buy Now</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>                
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div id="home-page-catalogue" class="container mt-5">
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+
+            <div class="col">
+                <div class="card">
+                    <a href="{% url 'viewAllMacs' %}">
+                        <img src="https://apple.ind.in/static/page/mbp.webp" class="card-img-top" alt="MacBook Pro" />
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">MacBook</h5>
+                        <p class="card-text">Check out and compare prices of latest MacBook Pro, Air etc</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated : 23rd December 2021</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <a href="{% url 'viewAlliPhones' %}">
+                        <img src="https://apple.ind.in/static/page/iphone.webp" class="card-img-top" alt="iPhone Pro" />
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">iPhone</h5>
+                        <p class="card-text">Check out and compare prices of latest iPhone 13 and iPhone 12</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated : 1st October 2021</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <a href="{% url 'viewAlliPads' %}">
+                        <img src="https://apple.ind.in/static/page/ipad.webp" class="card-img-top" alt="iPad" />
+                    </a>                    
+                    <div class="card-body">
+                        <h5 class="card-title">iPad</h5>
+                        <p class="card-text">Check out and compare prices of latest iPad Pro, iPad Air, iPad and iPad Mini - WiFi only and with cellular.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated : 5<sup>th</sup> June 2021</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <p class="text-center">
+                        <a href="{% url 'viewAllWatches' %}">
+                            <img src="https://apple.ind.in/static/page/watch.webp" class="card-img-top" alt="iPad Pro" />
+                        </a>
+                    </p>
+                    <div class="card-body">
+                        <h5 class="card-title">watch</h5>
+                        <p class="card-text">Compare Apple Watch Series 7 for both GPS and Cellular, 41mm and 44mm</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated : 24th December 2021</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+                  
+    </div>
+{% endblock %}

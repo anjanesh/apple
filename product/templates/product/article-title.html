@@ -1,0 +1,5 @@
+{% if article %}
+<div class="text-muted pb-2">
+    <span class="text-info">{{ article.type }}:</span> {{ article.pub_date | date:'dS M Y' }}- {{ article.title }} - <a href="{{ article.source_url }}" target="_blank">{{ article.source }}</a>
+</div>
+{% endif %}

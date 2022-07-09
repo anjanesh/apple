@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -29,8 +29,9 @@ urlpatterns = [
     path('mac/air/', views.viewAllMacs, kwargs = { 'type': 'air' }, name = 'viewAllMacAir'),
     path('mac/pro/', views.viewAllMacs, kwargs = { 'type': 'pro' }, name = 'viewAllMacPro'),
     path('mac', views.viewAllMacs, name = 'viewAllMacs'),
-    path('mac/<slug:slug>/', views.viewMac, name = 'viewMac'),    
-
+    path('mac/<slug:slug>/', views.viewMac, name = 'viewMac'),
+    
+    re_path(r'^iphone/(12|13)/$', views.viewAlliPhones, name = 'viewAlliPhonesN'),    
     path('iphone/<slug:slug>/', views.viewiPhone, name = 'viewiPhone'),
     path('iphone', views.viewAlliPhones, name = 'viewAlliPhones'),
     

@@ -24,7 +24,7 @@ def viewMac(request, slug):
     product, items = viewProduct(slug)
     return render(request, 'product/view.html', { 'product': product, 'items' : items })
 
-def viewAllMacs(request, **kwargs):        
+def viewAllMacs(request, **kwargs):
     products, article, paginator, page_number, page_obj = viewAllProducts(request, 'mac', **kwargs)
     return render(request, 'product/mac.html', { 'page_obj': page_obj, 'article': article })
 
@@ -32,8 +32,8 @@ def viewiPhone(request, slug):
     product, items = viewProduct(slug)
     return render(request, 'product/view.html', { 'product': product, 'items' : items })
 
-def viewAlliPhones(request):
-    products, article, paginator, page_number, page_obj = viewAllProducts(request, 'iphone')
+def viewAlliPhones(request, version = 0, **kwargs):    
+    products, article, paginator, page_number, page_obj = viewAllProducts(request, 'iphone', filters = { 'version' : version }, **kwargs)
     return render(request, 'product/iphone.html', { 'page_obj': page_obj, 'article': article })
 
 def viewiPad(request, slug):
@@ -63,7 +63,7 @@ def viewService(request):
     resellers = Reseller.objects.all()
     return render(request, 'service.html', { 'resellers' : resellers })    
 
-def viewAllProducts(request, typeOfProduct, **kwargs):
+def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
 
     if typeOfProduct == 'mac':
         
@@ -78,7 +78,13 @@ def viewAllProducts(request, typeOfProduct, **kwargs):
         article_query = Q(product__in=['MBA', 'MBP', 'iMAC', 'iMACPRO', 'MINI', 'MACPRO'])
 
     elif typeOfProduct == 'iphone':
-        query = Q(type__in=['iPHONE'])
+        
+        query = Q(type__in=['iPHONE'])        
+        if filters['version'] in ['12', '13']:            
+            query = query & Q(title__startswith='iPhone ' + filters['version'])            
+        
+        print(query)
+
         article_query = Q(product__in=['iPHONE'])
         
     elif typeOfProduct == 'ipad':

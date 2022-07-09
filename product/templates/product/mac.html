@@ -6,7 +6,7 @@
 {% load static %}
     
     <div class="d-flex justify-content-between align-items-center">
-        <h1 class="my-3">All Macs</h1>
+        <h1 class="my-3">Macs</h1>
 
         {% url 'viewAllMacs' as mac_url %}
         {% url 'viewAllMacAir' as air_url %}
@@ -16,8 +16,7 @@
             Filter By :
 
             {% if request.get_full_path != mac_url %}
-                <a href="{% url 'viewAllMacs' %}">All</a>
-                &middot;
+                <a href="{% url 'viewAllMacs' %}">All</a> &middot;                
             {% endif %}
             
             {% if request.get_full_path == air_url %}

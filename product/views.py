@@ -110,7 +110,7 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
     for product in products:
         product.price_locale = "₹{}".format(currency_in_indian_format(product.minimal_price))[:-3]
 
-    paginator = Paginator(products, 25)
+    paginator = Paginator(products, 100)
     
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

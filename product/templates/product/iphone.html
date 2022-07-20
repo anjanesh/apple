@@ -7,10 +7,6 @@
 
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="my-3">iPhone</h1>
-
-        {% url 'viewAlliPhonesN' as iphoneN_url %}
-
-        request.get_full_path : {{ request.get_full_path }}
         
         <div>
             Filter By :
@@ -57,9 +53,14 @@
                 <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
-    </div>    
+    </div>
+
+    <div class="d-flex mb-1">
+        <input type="text" name="search" id="search" class="form-control" placeholder="type in a search term here"/>
+        <!-- <button id="btn-search" class="btn btn-primary ms-1">Search</button> -->
+    </div>
     
-    <table class="table table-light table-striped table-hover table-bordered">
+    <table id="tbl-products" class="table table-light table-striped table-hover table-bordered">
         <thead>
           <tr>
             <th scope="col" class="text-center">#</th>

@@ -6,22 +6,29 @@
 
     <meta name="msvalidate.01" content="A9EB94CFC82159696FB884FC01B6F306" />
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
     <title>{% block title %} Apple Products India {% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
     
   </head>
   <body class="d-flex flex-column min-vh-100">
 
-    <div class="bg-light p-3">
-        <h1 class="display-4">
-            <a href="{% url 'home' %}">Apple India Products</a>
-        </h1>
-        <p class="lead">Compare Apple products in India with various Apple Resellers.</p>
+    <div class="d-flex flex-column flex-md-row flex-column justify-content-around align-items-center bg-light p-3">
+        <div>
+            <h1 class="display-4">
+                <a href="{% url 'home' %}">Apple India Products</a>
+            </h1>
+            <p class="lead">Compare Apple products in India with various Apple Resellers.</p>
+        </div>
+        <div>
+            <a href="https://www.icicibank.com/Personal-Banking/loans/consumer-finance/index-revamp.page" target="_blank">
+                <img class="img-thumbnail" src="https://apple-ind.s3.ap-south-1.amazonaws.com/images/icici-offer-24-month-no-cost-emi.jpg" alt="ICICI Offer - 24 months no cost EMI on Apple Products" style="width:608px; height:280px"/>
+            </a>
+        </div>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">

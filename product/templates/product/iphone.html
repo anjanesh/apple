@@ -29,6 +29,14 @@
             {% else %}
                 <a href="{% url 'viewAlliPhonesN' 13 %}">13</a>
             {% endif %}
+
+            &middot;
+
+            {% if request.get_full_path == '/iphone/14/' %}
+                14 (New)
+            {% else %}
+                <a href="{% url 'viewAlliPhonesN' 14 %}">14 (New)</a>
+            {% endif %}
             
         </div>
     </div>

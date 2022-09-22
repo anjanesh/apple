@@ -80,7 +80,7 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
     elif typeOfProduct == 'iphone':
         
         query = Q(type__in=['iPHONE'])        
-        if filters['version'] in ['12', '13']:            
+        if filters['version'] in ['12', '13', '14']:            
             query = query & Q(title__startswith='iPhone ' + filters['version'])            
         
         print(query)

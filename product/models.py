@@ -101,6 +101,7 @@ class Article(models.Model):
     )    
     
     class TypeOfArticle(models.TextChoices):
+        Event = 'Event', _('Event')
         News = 'News', _('News')
         Rumour = 'Rumour', _('Rumour')
         Announcement = 'Announcement', _('Announcement')

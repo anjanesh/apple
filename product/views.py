@@ -42,7 +42,7 @@ def viewiPad(request, slug):
 
 def viewAlliPads(request):
     products, article, paginator, page_number, page_obj = viewAllProducts(request, 'ipad')
-    return render(request, 'product/ipad.html', { 'page_obj': page_obj })    
+    return render(request, 'product/ipad.html', { 'page_obj': page_obj, 'article': article })    
 
 def viewWatch(request, slug):
     product, items = viewProduct(slug)
@@ -50,7 +50,7 @@ def viewWatch(request, slug):
 
 def viewAllWatches(request):
     products, article, paginator, page_number, page_obj = viewAllProducts(request, 'watch')
-    return render(request, 'product/watch.html', { 'page_obj': page_obj })    
+    return render(request, 'product/watch.html', { 'page_obj': page_obj, 'article': article })    
 
 def viewReseller(request, slug):    
     return render(request, 'reseller.html')
@@ -79,11 +79,9 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
 
     elif typeOfProduct == 'iphone':
         
-        query = Q(type__in=['iPHONE'])        
-        if filters['version'] in ['12', '13', '14']:            
-            query = query & Q(title__startswith='iPhone ' + filters['version'])            
-        
-        print(query)
+        query = Q(type__in=['iPHONE'])
+        if filters['version'] in ['12', '13', '14', '15']:
+            query = query & Q(title__startswith='iPhone ' + filters['version'])
 
         article_query = Q(product__in=['iPHONE'])
         
@@ -95,12 +93,14 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
         query = Q(type__in=['WATCH'])
         article_query = Q(product__in=['WATCH'])
 
-    products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price')).order_by('-year')
+    products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price')).order_by('-created')
+    # products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price'))
     
+    article_query = (Q(type=Article.TypeOfArticle.Event) | (Q(type__in=[Article.TypeOfArticle.Event, Article.TypeOfArticle.News, Article.TypeOfArticle.Rumour, Article.TypeOfArticle.Announcement]) & query))
     # article = Article.objects.all().filter(article_query).order_by('pub_date')[0]
     try:
         article = Article.objects.filter(article_query).latest('pub_date')
-        # print("article : ", article.source)
+        print("article : ", article.source)
     except Article.DoesNotExist:
         article = {}
     print("article : ", article)
@@ -109,8 +109,10 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
 
     for product in products:
         product.price_locale = "₹{}".format(currency_in_indian_format(product.minimal_price))[:-3]
+        print(product, product.price_locale)
 
     paginator = Paginator(products, 100)
+    
     
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

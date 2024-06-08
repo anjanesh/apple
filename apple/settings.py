@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!0mz9&!esh%qc%h54-j&wo9pdham4x#i0apa99-ia3n!w_p20o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['apple.ind.in']
+ALLOWED_HOSTS = ['apple.ind.in', 'ambient-cubist-425701-d0.uc.r.appspot.com']
 
 
 # Application definition

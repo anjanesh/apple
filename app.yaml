@@ -1,2 +1,8 @@
+# https://cloud.google.com/appengine/docs/standard/reference/app-yaml?tab=python
+
 runtime: python312
+instance_class: F1
 service: default
+handlers:
+- url: /static
+  static_dir: static

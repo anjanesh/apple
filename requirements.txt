@@ -1,12 +1,12 @@
 asgiref
 certifi==2020.12.5
 chardet==4.0.0
-Django==5.0.6
+Django==5.0.7
 idna==2.10
 Pillow==8.2.0
 python-dateutil==2.8.1
 pytz==2020.5
-requests==2.25.1
+requests
 six==1.15.0
-sqlparse==0.4.1
-urllib3==1.26.3
+sqlparse
+urllib3

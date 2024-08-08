@@ -31,7 +31,7 @@ urlpatterns = [
     path('mac', views.viewAllMacs, name = 'viewAllMacs'),
     path('mac/<slug:slug>/', views.viewMac, name = 'viewMac'),
     
-    re_path(r'^iphone/(12|13|14)/$', views.viewAlliPhones, name = 'viewAlliPhonesN'),
+    re_path(r'^iphone/(12|13|14|15|16)/$', views.viewAlliPhones, name = 'viewAlliPhonesN'),
     path('iphone/<slug:slug>/', views.viewiPhone, name = 'viewiPhone'),
     path('iphone', views.viewAlliPhones, name = 'viewAlliPhones'),
     

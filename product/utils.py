@@ -6,6 +6,7 @@ import decimal
 # https://codereview.stackexchange.com/questions/148853/convert-an-amount-to-indian-notation
 def currency_in_indian_format(n):
     """ Convert a number (int / float) into indian formatting style """
+    
     d = decimal.Decimal(str(n))
 
     if d.as_tuple().exponent < -2:

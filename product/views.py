@@ -80,7 +80,7 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
     elif typeOfProduct == 'iphone':
         
         query = Q(type__in=['iPHONE'])
-        if filters['version'] in ['12', '13', '14', '15']:
+        if filters['version'] in ['12', '13', '14', '15', '16']:
             query = query & Q(title__startswith='iPhone ' + filters['version'])
 
         article_query = Q(product__in=['iPHONE'])
@@ -96,7 +96,10 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
     products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price')).order_by('-created')
     # products = Product.objects.all().filter(query).annotate(minimal_price=Min('item__price'))
     
-    article_query = (Q(type=Article.TypeOfArticle.Event) | (Q(type__in=[Article.TypeOfArticle.Event, Article.TypeOfArticle.News, Article.TypeOfArticle.Rumour, Article.TypeOfArticle.Announcement]) & query))
+    article_query = (
+            Q(type=Article.TypeOfArticle.Event) | Q(type=Article.TypeOfArticle.News) | Q(type=Article.TypeOfArticle.Rumour) | Q(type=Article.TypeOfArticle.Announcement) & query
+            # (Q(type__in=[Article.TypeOfArticle.Event, Article.TypeOfArticle.News, Article.TypeOfArticle.Rumour, Article.TypeOfArticle.Announcement]) & query)
+        )
     # article = Article.objects.all().filter(article_query).order_by('pub_date')[0]
     try:
         article = Article.objects.filter(article_query).latest('pub_date')
@@ -130,3 +133,7 @@ def viewProduct(slug):
         item.price_locale = "₹{}".format(currency_in_indian_format(item.price))[:-3]
 
     return (product, items)
+
+
+def contactUs(request):
+    return render(request, 'contact.html', {})

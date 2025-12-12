@@ -7,7 +7,12 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title', 'type', 'year', 'storage']
     date_hierarchy = 'created'
 
-
 admin.site.register(Product, ProductAdmin)
 
-admin.site.register([Reseller, ServiceCenter, Item, Article])
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('product', 'reseller', 'price', 'active')
+    search_fields = ['product__title', 'reseller__name', 'price']
+
+admin.site.register(Item, ItemAdmin)
+
+admin.site.register([Reseller, ServiceCenter, Article])

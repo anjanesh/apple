@@ -80,7 +80,7 @@ def viewAllProducts(request, typeOfProduct, filters = None, **kwargs):
     elif typeOfProduct == 'iphone':
         
         query = Q(type__in=['iPHONE'])
-        if filters['version'] in ['12', '13', '14', '15', '16']:
+        if filters['version'] in ['12', '13', '14', '15', '16', '17']:
             query = query & Q(title__startswith='iPhone ' + filters['version'])
 
         article_query = Q(product__in=['iPHONE'])
@@ -137,3 +137,6 @@ def viewProduct(slug):
 
 def contactUs(request):
     return render(request, 'contact.html', {})
+
+def adsTxt(request):
+    return render(request, 'adsTxt.html', {})

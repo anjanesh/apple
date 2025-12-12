@@ -47,6 +47,8 @@ urlpatterns = [
     path('service', views.viewService, name = 'viewService'),
     path('contact', views.contactUs, name='contactUs'),
 
+    path('ads.txt', views.adsTxt, name='adsTxt'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
